@@ -1,5 +1,4 @@
 -- ====================|| VARIABLES || ==================== --
-
 local QBCore = exports['qb-core']:GetCoreObject()
 local CurrentPump = nil
 local CurrentObjects = { nozzle = nil, rope = nil }
@@ -7,7 +6,6 @@ local CurrentVehicle = nil
 local Blips = {}
 
 -- ====================|| FUNCTIONS || ==================== --
-
 local loadAnimDict = function (dict)
     if not DoesAnimDictExist(dict) then return end
     while not HasAnimDictLoaded(dict) do
@@ -385,7 +383,6 @@ RegisterNuiCallback('refill', function (data, cb)
 end)
 
 -- ====================|| EVENTS || ==================== --
-
 AddEventHandler('onResourceStop', function (res)
     if GetCurrentResourceName() ~= res then return end
     removeObjects()
@@ -402,7 +399,6 @@ RegisterNetEvent('QBCore:Player:SetPlayerData', function(pData)
 end)
 
 -- ====================|| INITIALIZATION || ==================== --
-
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     init()
 end)
