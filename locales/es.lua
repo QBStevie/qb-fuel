@@ -1,3 +1,4 @@
+-- luacheck: globals Lang Locale
 local Translations = {
     progress = {
         refueling = 'Repostando Vehículo...',
@@ -29,7 +30,6 @@ local Translations = {
 }
 
 if GetConvar('qb_locale', 'en') == 'es' then
-    local Locale = Locale
     Lang = Locale:new({
         phrases = Translations,
         warnOnMissing = true,
