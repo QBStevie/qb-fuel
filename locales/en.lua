@@ -1,3 +1,4 @@
+-- luacheck: globals Lang Locale
 local Translations = {
     progress = {
         refueling = 'Refueling...',
@@ -28,7 +29,6 @@ local Translations = {
     }
 }
 
-local Locale = Locale
 Lang = Lang or Locale:new({
     phrases = Translations,
     warnOnMissing = true
