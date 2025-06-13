@@ -29,6 +29,7 @@ local Translations = {
 }
 
 if GetConvar('qb_locale', 'en') == 'nl' then
+    local Locale = Locale
     Lang = Locale:new({
         phrases = Translations,
         warnOnMissing = true,
