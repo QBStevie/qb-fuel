@@ -224,12 +224,13 @@ local refillVehicleFuel = function (liter)
         disableMouse = false,
         disableCombat = true,
     }, {}, {}, {}, function()
-        local success = QBCore.Functions.TriggerCallback('qb-fuel:server:refillVehicle', liter)
-        if not success then return QBCore.Functions.Notify(Lang:t('error.no_money'), 'error') end
-        removeObjects()
-        exports['qb-fuel']:SetFuel(veh, math.floor(exports['qb-fuel']:GetFuel(veh) or 0) + liter)
-        QBCore.Functions.Notify(Lang:t('success.refueled'), 'success')
-        ClearPedTasks(ped)
+        QBCore.Functions.TriggerCallback('qb-fuel:server:refillVehicle', function(success)
+            if not success then return QBCore.Functions.Notify(Lang:t('error.no_money'), 'error') end
+            removeObjects()
+            exports['qb-fuel']:SetFuel(veh, math.floor(exports['qb-fuel']:GetFuel(veh) or 0) + liter)
+            QBCore.Functions.Notify(Lang:t('success.refueled'), 'success')
+            ClearPedTasks(ped)
+        end, liter)
     end, function()
         removeObjects()
     end)
@@ -319,7 +320,7 @@ local setUpTarget = function ()
                     type = 'server',
                     event = 'qb-fuel:server:refillJerryCan',
                     icon = 'fa-solid fa-arrows-rotate',
-                    label = Lang:t('target.refill_jerrycan', { price = Config.JerryCanCost }),
+                    label = Lang:t('target.refill_jerrycan', { price = Config.JerryCanRefillCost }),
                     canInteract = function()
                         return GetSelectedPedWeapon(PlayerPedId()) == `WEAPON_PETROLCAN`
                     end
